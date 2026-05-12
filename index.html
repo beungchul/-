@@ -467,7 +467,7 @@
       const nn = norm(name);
       const region = extractRegion(name);
       if (nn.includes('청솔마을')) {
-        const m = nn.match(COMPLEX_PATTERN) || (name || '').match(COMPLEX_PATTERN);
+        const m = nn.match(COMPLEX_PATTERN);
         if (m) {
           const d = parseInt(m[1], 10);
           if (d >= 1 && d <= 4) return {
@@ -588,7 +588,7 @@
 
     function openPostcode() {
       if (typeof daum === 'undefined' || typeof daum.Postcode === 'undefined') {
-        alert('카카오 주소 API를 불러오지 못했습니다. 잠시 후 다시 시도해주세요.');
+        alert('카카오 주소 API를 불러오지 못했습니다. 페이지를 새로고침하거나 인터넷 연결을 확인해주세요.');
         return;
       }
       new daum.Postcode({
