@@ -460,12 +460,14 @@
       return null;
     }
 
+    const COMPLEX_PATTERN = /(\d+)\s*단지/;
+
     function matchBuilding(name) {
       if (!name) return null;
       const nn = norm(name);
       const region = extractRegion(name);
       if (nn.includes('청솔마을')) {
-        const m = nn.match(/(\d+)\s*단지/) || (name || '').match(/(\d+)\s*단지/);
+        const m = nn.match(COMPLEX_PATTERN) || (name || '').match(COMPLEX_PATTERN);
         if (m) {
           const d = parseInt(m[1], 10);
           if (d >= 1 && d <= 4) return {
@@ -510,11 +512,11 @@
     let pending = null;
 
     function showModal() {
-      document.getElementById('imaeModal').style.display = 'flex';
+      document.getElementById('imaeModal').classList.add('show');
     }
 
     function hideModal() {
-      document.getElementById('imaeModal').style.display = 'none';
+      document.getElementById('imaeModal').classList.remove('show');
     }
 
     function findDistrict(addr) {
@@ -586,7 +588,7 @@
 
     function openPostcode() {
       if (typeof daum === 'undefined' || typeof daum.Postcode === 'undefined') {
-        alert('카카오 주소 API를 불러오는 중입니다. 잠시 후 다시 시도해주세요.');
+        alert('카카오 주소 API를 불러오지 못했습니다. 잠시 후 다시 시도해주세요.');
         return;
       }
       new daum.Postcode({
